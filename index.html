@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krunal Rana | Developer</title>
+    <meta name="description" content="Krunal Rana - Developer & Creator. All my links in one place.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card-bg: #ffffff;
+            --card-bg-hover: #f8f8f8;
+            --text-primary: #ffffff;
+            --text-card: #1a1a1a;
+            --text-secondary: #a0a0a0;
+            --border-card: #e8e8e8;
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 6px 20px rgba(0,0,0,0.04);
+            --shadow-card-hover: 0 2px 8px rgba(0,0,0,0.1), 0 12px 32px rgba(0,0,0,0.08);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-full: 50%;
+            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 440px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(circle at 50% 15%, rgba(255,255,255,0.025) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.015) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.02) 0%, transparent 50%);
+            animation: ambientGlow 12s ease-in-out infinite alternate;
+        }
+        @keyframes ambientGlow {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.08); }
+            100% { opacity: 0.7; transform: scale(1.03); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.25;
+            background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: var(--max-width);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            animation: fadeInDown 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: var(--radius-full);
+            padding: 3px;
+            background: linear-gradient(135deg, #333333 0%, #555555 50%, #333333 100%);
+            box-shadow: 0 0 30px rgba(255,255,255,0.06), 0 0 60px rgba(255,255,255,0.02);
+            transition: box-shadow 0.35s ease, background 0.35s ease;
+        }
+        .avatar-wrapper:hover {
+            box-shadow: 0 0 40px rgba(255,255,255,0.12), 0 0 80px rgba(255,255,255,0.05);
+            background: linear-gradient(135deg, #555555 0%, #777777 50%, #555555 100%);
+        }
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-full);
+            display: block;
+            transition: transform 0.35s ease;
+        }
+        .avatar-wrapper:hover .avatar-img { transform: scale(1.04); }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 50%, #1e1e1e 100%);
+            background-size: 200% 200%;
+            animation: shimmer 1.8s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #555;
+        }
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .tagline-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 22px;
+        }
+        .tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: #888888;
+            letter-spacing: 0.02em;
+        }
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #cccccc;
+            border-radius: 2px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .links-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text-card);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, background 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .link-card:nth-child(1) { animation-delay: 0.15s; }
+        .link-card:nth-child(2) { animation-delay: 0.22s; }
+        .link-card:nth-child(3) { animation-delay: 0.29s; }
+        .link-card:nth-child(4) { animation-delay: 0.36s; }
+        .link-card:nth-child(5) { animation-delay: 0.43s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) scaleY(0);
+            width: 3px;
+            height: 60%;
+            background: #1a1a1a;
+            border-radius: 0 4px 4px 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .link-card:hover::before { transform: translateY(-50%) scaleY(1); }
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card-hover);
+            background: var(--card-bg-hover);
+            border-color: #d0d0d0;
+        }
+        .link-card:active { transform: scale(0.985); transition: transform 0.1s ease; }
+
+        .link-icon {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            transition: all 0.35s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .link-card:hover .link-icon {
+            background: #1a1a1a;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .link-card.github:hover .link-icon { background: #24292e; }
+        .link-card.linkedin:hover .link-icon { background: #0a66c2; }
+        .link-card.email:hover .link-icon { background: #1a1a1a; }
+        .link-card.resume:hover .link-icon { background: #1a1a1a; }
+
+        .link-label {
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.93rem;
+            color: #1a1a1a;
+            letter-spacing: -0.01em;
+        }
+        .link-arrow {
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            color: #bbbbbb;
+            transition: all 0.35s ease;
+            opacity: 0;
+            transform: translateX(-8px);
+        }
+        .link-card:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(0);
+            color: #555555;
+        }
+
+        /* ── Instagram expandable card ── */
+        .instagram-card {
+            cursor: pointer;
+            flex-direction: column;
+            padding: 0;
+            overflow: visible;
+        }
+        .instagram-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 20px;
+            width: 100%;
+            border-radius: var(--radius-md);
+            background: var(--card-bg);
+            transition: background 0.2s ease;
+        }
+        .instagram-card:hover .card-header {
+            background: var(--card-bg-hover);
+        }
+        .instagram-card .card-header .link-icon {
+            background: #f5f5f5;
+            color: #1a1a1a;
+            transition: all 0.35s ease;
+        }
+        .instagram-card:hover .card-header .link-icon {
+            background: #1a1a1a;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        .instagram-card .card-header .link-label {
+            color: #1a1a1a;
+        }
+        .instagram-card .chevron {
+            font-size: 0.8rem;
+            color: #bbbbbb;
+            transition: transform 0.3s ease;
+        }
+        .instagram-card.open .chevron {
+            transform: rotate(180deg);
+        }
+        .sub-links {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.2s ease;
+            background: #ffffff;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .instagram-card.open .sub-links {
+            max-height: 220px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .sub-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #333333;
+            font-size: 0.88rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f5f5f5;
+            transition: background 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+        .sub-link:last-child {
+            border-bottom: none;
+        }
+        .sub-link:hover {
+            background: #f9f9f9;
+            color: #000000;
+        }
+        .sub-link i {
+            font-size: 0.9rem;
+            width: 20px;
+            text-align: center;
+            color: #888888;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #555555;
+            letter-spacing: 0.03em;
+            font-family: 'JetBrains Mono', monospace;
+            animation: fadeInDown 0.7s 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+            padding-top: 8px;
+        }
+        .footer .bracket { color: #444444; }
+        .footer .slash { color: #555555; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 20px 12px; }
+            .container { gap: 22px; }
+            .avatar-wrapper { width: 90px; height: 90px; padding: 2.5px; }
+            .profile-name { font-size: 1.35rem; }
+            .tagline { font-size: 0.74rem; }
+            .link-card, .instagram-card .card-header { padding: 13px 16px; gap: 12px; border-radius: var(--radius-sm); }
+            .link-icon { width: 36px; height: 36px; font-size: 1rem; border-radius: 10px; }
+            .link-label { font-size: 0.85rem; }
+            .links-section { gap: 10px; }
+            .sub-link { padding: 10px 16px; font-size: 0.8rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .cursor-blink { animation: none; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toast" id="toast" aria-live="polite"></div>
+
+    <main class="container">
+        <section class="profile-section" aria-label="Profile">
+            <div class="avatar-wrapper" title="GitHub Profile Photo">
+                <div class="avatar-inner">
+                    <div class="avatar-placeholder" id="avatar-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <img
+                    class="avatar-img"
+                    id="avatar-img"
+                    src=""
+                    alt="Krunal Rana"
+                    loading="eager"
+                    style="display: none;"
+                    onload="onAvatarLoad()"
+                    onerror="onAvatarError()"
+                    >
+                </div>
+            </div>
+            <h1 class="profile-name" id="profile-name">Krunal Rana</h1>
+            <div class="tagline-wrapper">
+                <span class="tagline" id="tagline-text"></span>
+                <span class="cursor-blink" aria-hidden="true"></span>
+            </div>
+        </section>
+
+        <nav class="links-section" aria-label="Social links">
+            <a href="https://github.com/B2-krunalrana" target="_blank" rel="noopener noreferrer" class="link-card github" aria-label="GitHub Profile">
+                <span class="link-icon"><i class="fa-brands fa-github"></i></span>
+                <span class="link-label">GitHub</span>
+                <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+            <a href="https://www.linkedin.com/in/krunal-rana/" target="_blank" rel="noopener noreferrer" class="link-card linkedin" aria-label="LinkedIn Profile">
+                <span class="link-icon"><i class="fa-brands fa-linkedin-in"></i></span>
+                <span class="link-label">LinkedIn</span>
+                <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+            <a href="mailto:work.krunalrana@gmail.com" class="link-card email" id="email-link" aria-label="Email" title="Click to copy email address">
+                <span class="link-icon"><i class="fa-solid fa-envelope"></i></span>
+                <span class="link-label">work.krunalrana@gmail.com</span>
+                <span class="link-arrow"><i class="fa-regular fa-copy"></i></span>
+            </a>
+
+            <!-- Instagram expandable card -->
+            <div class="link-card instagram-card" id="instagram-card">
+                <div class="card-header">
+                    <span class="link-icon"><i class="fa-brands fa-instagram"></i></span>
+                    <span class="link-label">Instagram</span>
+                    <span class="chevron"><i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+                <div class="sub-links">
+                    <a href="https://www.instagram.com/meet.krunalrana/" target="_blank" rel="noopener noreferrer" class="sub-link">
+                        <i class="fa-solid fa-user"></i> Personal
+                    </a>
+                    <a href="https://www.instagram.com/the_4th_dimension/" target="_blank" rel="noopener noreferrer" class="sub-link">
+                        <i class="fa-solid fa-palette"></i> Hobby
+                    </a>
+                    <a href="https://www.instagram.com/meet.b2.ai/" target="_blank" rel="noopener noreferrer" class="sub-link">
+                        <i class="fa-solid fa-robot"></i> AI Posting
+                    </a>
+                </div>
+            </div>
+
+            <a href="https://drive.google.com/drive/folders/1I9RicKN6LtGkSaMdgVq-dPFWnp6SjBCK?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-card resume" aria-label="Resume / CV">
+                <span class="link-icon"><i class="fa-solid fa-file-lines"></i></span>
+                <span class="link-label">Resume / CV</span>
+                <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+        </nav>
+
+        <footer class="footer">
+            <span class="bracket">{</span>
+            <span class="slash">//</span> built with &hearts; <span class="slash">//</span>
+            <span class="bracket">}</span>
+        </footer>
+    </main>
+
+    <script>
+        (function() {
+            // ──────────────── EDIT YOUR LINKEDIN TAGLINE HERE ────────────────
+            const LINKEDIN_TAGLINE = "Full Stack AI Engineer @ AhaGuru | Python, React, AWS,GCP | AI Solution Architecture | RAG & Generative AI";
+            // ─────────────────────────────────────────────────────────────────
+
+            const avatarImg = document.getElementById('avatar-img');
+            const avatarPlaceholder = document.getElementById('avatar-placeholder');
+            const profileName = document.getElementById('profile-name');
+            const taglineText = document.getElementById('tagline-text');
+            const toast = document.getElementById('toast');
+            const emailLink = document.getElementById('email-link');
+            const instagramCard = document.getElementById('instagram-card');
+
+            const GITHUB_USERNAME = 'B2-krunalrana';
+            const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}`;
+            let avatarLoaded = false;
+
+            async function fetchGitHubProfile() {
+                try {
+                    const response = await fetch(GITHUB_API_URL, { headers: { 'Accept': 'application/vnd.github+json' } });
+                    if (!response.ok) throw new Error(`Status ${response.status}`);
+                    const data = await response.json();
+
+                    if (data.avatar_url) {
+                        avatarImg.src = data.avatar_url;
+                        if (avatarImg.complete && avatarImg.naturalWidth > 0) onAvatarLoad();
+                    }
+                    if (data.name && data.name.trim().length > 0) {
+                        profileName.textContent = data.name;
+                    }
+                } catch (error) {
+                    console.warn('GitHub fetch failed:', error.message);
+                    avatarImg.src = `https://github.com/${GITHUB_USERNAME}.png`;
+                    if (avatarImg.complete && avatarImg.naturalWidth > 0) onAvatarLoad();
+                }
+                typeWriterEffect(LINKEDIN_TAGLINE);
+            }
+
+            window.onAvatarLoad = function() {
+                if (avatarLoaded) return;
+                avatarLoaded = true;
+                avatarPlaceholder.style.display = 'none';
+                avatarImg.style.display = 'block';
+                avatarImg.style.animation = 'fadeInDown 0.5s ease both';
+            };
+
+            window.onAvatarError = function() {
+                avatarPlaceholder.innerHTML = '<i class="fa-solid fa-user-astronaut"></i>';
+                avatarPlaceholder.style.fontSize = '32px';
+            };
+
+            function typeWriterEffect(text) {
+                taglineText.textContent = '';
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < text.length) {
+                        taglineText.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 50);
+            }
+
+            // ── Instagram toggle ──
+            instagramCard.addEventListener('click', function(e) {
+                // Prevent toggle if a sub-link was clicked directly
+                if (e.target.closest('.sub-link')) return;
+                this.classList.toggle('open');
+            });
+
+            // Close when clicking outside (optional but nice)
+            document.addEventListener('click', function(e) {
+                if (!instagramCard.contains(e.target)) {
+                    instagramCard.classList.remove('open');
+                }
+            });
+
+            // ── Email copy ──
+            const EMAIL = 'work.krunalrana@gmail.com';
+            emailLink.addEventListener('click', function(e) {
+                if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+                e.preventDefault();
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(EMAIL).then(() => showToast('📋 Email copied!')).catch(fallbackCopy);
+                } else fallbackCopy();
+            });
+
+            function fallbackCopy() {
+                const ta = document.createElement('textarea');
+                ta.value = EMAIL;
+                ta.style.position = 'fixed'; ta.style.left = '-9999px'; ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.focus(); ta.select();
+                try { document.execCommand('copy'); showToast('📋 Email copied!'); } catch (e) { window.location.href = `mailto:${EMAIL}`; }
+                document.body.removeChild(ta);
+            }
+
+            let toastTimeout;
+            function showToast(msg) {
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toast.textContent = msg;
+                toast.classList.add('show');
+                toastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
+            }
+
+            // Start
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fetchGitHubProfile);
+            else fetchGitHubProfile();
+        })();
+    </script>
+</body>
+</html>
