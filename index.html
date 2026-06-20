@@ -228,6 +228,7 @@
         .link-card:nth-child(3) { animation-delay: 0.29s; }
         .link-card:nth-child(4) { animation-delay: 0.36s; }
         .link-card:nth-child(5) { animation-delay: 0.43s; }
+        .link-card:nth-child(6) { animation-delay: 0.50s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -276,9 +277,10 @@
             transform: scale(1.05);
         }
 
-        .link-card.github:hover .link-icon { background: #24292e; }
         .link-card.linkedin:hover .link-icon { background: #0a66c2; }
         .link-card.email:hover .link-icon { background: #1a1a1a; }
+        .link-card.cal:hover .link-icon { background: #1a1a1a; }
+        .link-card.github:hover .link-icon { background: #24292e; }
         .link-card.resume:hover .link-icon { background: #1a1a1a; }
 
         .link-label {
@@ -473,23 +475,35 @@
         </section>
 
         <nav class="links-section" aria-label="Social links">
-            <a href="https://github.com/B2-krunalrana" target="_blank" rel="noopener noreferrer" class="link-card github" aria-label="GitHub Profile">
-                <span class="link-icon"><i class="fa-brands fa-github"></i></span>
-                <span class="link-label">GitHub</span>
-                <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-            </a>
+            <!-- 1. LinkedIn -->
             <a href="https://www.linkedin.com/in/krunal-rana/" target="_blank" rel="noopener noreferrer" class="link-card linkedin" aria-label="LinkedIn Profile">
                 <span class="link-icon"><i class="fa-brands fa-linkedin-in"></i></span>
                 <span class="link-label">LinkedIn</span>
                 <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
             </a>
+
+            <!-- 2. Email (Gmail) -->
             <a href="mailto:work.krunalrana@gmail.com" class="link-card email" id="email-link" aria-label="Email" title="Click to copy email address">
                 <span class="link-icon"><i class="fa-solid fa-envelope"></i></span>
                 <span class="link-label">work.krunalrana@gmail.com</span>
                 <span class="link-arrow"><i class="fa-regular fa-copy"></i></span>
             </a>
 
-            <!-- Instagram expandable card -->
+            <!-- 3. Book Call (Cal.com) -->
+            <a href="https://cal.com/connect.krunalrana" target="_blank" rel="noopener noreferrer" class="link-card cal" aria-label="Book a call">
+                <span class="link-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                <span class="link-label">Book a Call</span>
+                <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+
+            <!-- 4. GitHub -->
+            <a href="https://github.com/B2-krunalrana" target="_blank" rel="noopener noreferrer" class="link-card github" aria-label="GitHub Profile">
+                <span class="link-icon"><i class="fa-brands fa-github"></i></span>
+                <span class="link-label">GitHub</span>
+                <span class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+
+            <!-- 5. Instagram (expandable) -->
             <div class="link-card instagram-card" id="instagram-card">
                 <div class="card-header">
                     <span class="link-icon"><i class="fa-brands fa-instagram"></i></span>
@@ -509,6 +523,7 @@
                 </div>
             </div>
 
+            <!-- 6. Resume / CV -->
             <a href="https://drive.google.com/drive/folders/1I9RicKN6LtGkSaMdgVq-dPFWnp6SjBCK?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-card resume" aria-label="Resume / CV">
                 <span class="link-icon"><i class="fa-solid fa-file-lines"></i></span>
                 <span class="link-label">Resume / CV</span>
@@ -525,9 +540,9 @@
 
     <script>
         (function() {
-            // ──────────────── EDIT YOUR LINKEDIN TAGLINE HERE ────────────────
+            // ─────── YOUR LINKEDIN TAGLINE ───────
             const LINKEDIN_TAGLINE = "Full Stack AI Engineer @ AhaGuru | Python, React, AWS,GCP | AI Solution Architecture | RAG & Generative AI";
-            // ─────────────────────────────────────────────────────────────────
+            // ────────────────────────────────────
 
             const avatarImg = document.getElementById('avatar-img');
             const avatarPlaceholder = document.getElementById('avatar-placeholder');
@@ -585,17 +600,15 @@
                     } else {
                         clearInterval(interval);
                     }
-                }, 50);
+                }, 20); // slightly faster for longer text
             }
 
             // ── Instagram toggle ──
             instagramCard.addEventListener('click', function(e) {
-                // Prevent toggle if a sub-link was clicked directly
                 if (e.target.closest('.sub-link')) return;
                 this.classList.toggle('open');
             });
 
-            // Close when clicking outside (optional but nice)
             document.addEventListener('click', function(e) {
                 if (!instagramCard.contains(e.target)) {
                     instagramCard.classList.remove('open');
